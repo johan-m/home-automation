@@ -1,0 +1,10 @@
+services:
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:2.1.2-alpine
+    volumes:
+      - $HOME/mosquitto/config:/mosquitto/config
+      - $HOME/mosquitto/data:/mosquitto/data
+    ports:
+      - 1883:1883
+      - 9883:9883
