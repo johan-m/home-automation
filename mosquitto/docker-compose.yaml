@@ -2,6 +2,9 @@ services:
   mosquitto:
     container_name: mosquitto
     image: eclipse-mosquitto:2.1.2-alpine
+    environment:
+      - PUID=0
+      - PGID=0
     volumes:
       - $HOME/mosquitto/config:/mosquitto/config
       - $HOME/mosquitto/data:/mosquitto/data
