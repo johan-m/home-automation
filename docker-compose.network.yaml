@@ -1,0 +1,13 @@
+services:
+  homeassistant:
+    networks:
+      - local_network
+
+  mosquitto:
+    networks:
+      - local_network
+
+networks:
+  local_network:
+    driver: bridge
+
