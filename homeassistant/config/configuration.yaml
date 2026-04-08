@@ -1,0 +1,24 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# Command line integration
+command_line:
+  # CPU temperature sensor
+  - sensor:
+      name: CPU Temperature
+      unique_id: rpi_cpu_temperature
+      command: "cat /sys/class/thermal/thermal_zone0/temp"
+      device_class: temperature
+      unit_of_measurement: "°C"
+      value_template: "{{ value | multiply(0.001) | round(1) }}"
+      scan_interval: 60
+
