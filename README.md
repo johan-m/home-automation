@@ -13,8 +13,8 @@ The current home automation server consists of the following components
 ## Software
 
 - OS: Debian GNU/Linux 13 (trixie) aarch64
-- Kernel: Linux 6.12.75+rpt-rpi-v8
-- Docker: 29.3.1 rootless
+- Kernel: Linux 6.18.50+rpt-rpi-v8
+- Docker: 29.8.1 rootless
 - Home Assistant: 2026.3.4
 - Eclipse Mosquitto: 2.1.2-alpine
 - Caddy: 2.11.4
