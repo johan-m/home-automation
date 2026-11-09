@@ -22,6 +22,88 @@ command_line:
       value_template: "{{ value | multiply(0.001) | round(1) }}"
       scan_interval: 60
 
+# Templates
+template:
+  # Honeywell Evohome living room battery sensor
+  - binary_sensor:
+    - name: Evohome living room battery
+      unique_id: evohome_living_room_battery
+      device_class: battery
+      state: >
+        {% set status = state_attr('climate.woonkamer', 'status') | default({}, true) %}
+        {% set faults = status.activeFaults | default([], true) %}
+        {{ faults | selectattr('fault_type', 'equalto', 'TempZoneActuatorLowBattery') | list | count > 0 }}
+
+  # Honeywell Evohome living room connectivity sensor
+  - binary_sensor:
+    - name: Evohome living room connectivity
+      unique_id: evohome_living_room_connectivity
+      device_class: connectivity
+      state: >
+        {% set status = state_attr('climate.woonkamer', 'status') | default({}, true) %}
+        {% set faults = status.activeFaults | default([], true) %}
+        {{ faults | selectattr('fault_type', 'equalto', 'TempZoneActuatorCommunicationLost') | list | count == 0 }}
+
+  # Honeywell Evohome bedroom battery sensor
+  - binary_sensor:
+    - name: Evohome bedroom battery
+      unique_id: evohome_bedroom_battery
+      device_class: battery
+      state: >
+        {% set status = state_attr('climate.slaapkamer', 'status') | default({}, true) %}
+        {% set faults = status.activeFaults | default([], true) %}
+        {{ faults | selectattr('fault_type', 'equalto', 'TempZoneActuatorLowBattery') | list | count > 0 }}
+
+  # Honeywell Evohome bedroom connectivity sensor
+  - binary_sensor:
+    - name: Evohome bedroom connectivity
+      unique_id: evohome_bedroom_connectivity
+      device_class: connectivity
+      state: >
+        {% set status = state_attr('climate.slaapkamer', 'status') | default({}, true) %}
+        {% set faults = status.activeFaults | default([], true) %}
+        {{ faults | selectattr('fault_type', 'equalto', 'TempZoneActuatorCommunicationLost') | list | count == 0 }}
+
+  # Honeywell Evohome child bedroom battery sensor
+  - binary_sensor:
+    - name: Evohome child bedroom battery
+      unique_id: evohome_child_bedroom_battery
+      device_class: battery
+      state: >
+        {% set status = state_attr('climate.kinderkamer', 'status') | default({}, true) %}
+        {% set faults = status.activeFaults | default([], true) %}
+        {{ faults | selectattr('fault_type', 'equalto', 'TempZoneActuatorLowBattery') | list | count > 0 }}
+
+  # Honeywell Evohome child bedroom connectivity sensor
+  - binary_sensor:
+    - name: Evohome child bedroom connectivity
+      unique_id: evohome_child_bedroom_connectivity
+      device_class: connectivity
+      state: >
+        {% set status = state_attr('climate.kinderkamer', 'status') | default({}, true) %}
+        {% set faults = status.activeFaults | default([], true) %}
+        {{ faults | selectattr('fault_type', 'equalto', 'TempZoneActuatorCommunicationLost') | list | count == 0 }}
+
+  # Honeywell Evohome attic battery sensor
+  - binary_sensor:
+    - name: Evohome attic battery
+      unique_id: evohome_attic_battery
+      device_class: battery
+      state: >
+        {% set status = state_attr('climate.zolder', 'status') | default({}, true) %}
+        {% set faults = status.activeFaults | default([], true) %}
+        {{ faults | selectattr('fault_type', 'equalto', 'TempZoneActuatorLowBattery') | list | count > 0 }}
+
+  # Honeywell Evohome attic connectivity sensor
+  - binary_sensor:
+    - name: Evohome attic connectivity
+      unique_id: evohome_attic_connectivity
+      device_class: connectivity
+      state: >
+        {% set status = state_attr('climate.zolder', 'status') | default({}, true) %}
+        {% set faults = status.activeFaults | default([], true) %}
+        {{ faults | selectattr('fault_type', 'equalto', 'TempZoneActuatorCommunicationLost') | list | count == 0 }}
+
 # Honeywell Evohome
 evohome:
   username: !secret evohome_username
