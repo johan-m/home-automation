@@ -22,3 +22,8 @@ command_line:
       value_template: "{{ value | multiply(0.001) | round(1) }}"
       scan_interval: 60
 
+# Honeywell Evohome
+evohome:
+  username: !secret evohome_username
+  password: !secret evohome_password
+
